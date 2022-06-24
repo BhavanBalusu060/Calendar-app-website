@@ -7,7 +7,7 @@ import '../Styles/Dashboard.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function Dashboard() {
-  const [navbarOpen, setNavbarOpen] = useState(true);
+  const [navbarOpen, setNavbarOpen] = useState(false);
   const handleToggle = () => {
     setNavbarOpen(prev => !prev)
   };

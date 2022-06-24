@@ -4,8 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import { query, collection, getDocs, where } from 'firebase/firestore';
 import { auth, db, logout } from '../firebase';
 import '../Styles/Dashboard.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function Dashboard() {
+  const [navbarOpen, setNavbarOpen] = useState(true);
+  const handleToggle = () => {
+    setNavbarOpen(prev => !prev)
+  };
+
+  const closeMenu = () => {
+    setNavbarOpen(false);
+  };
+
   const [userName, setName] = useState('');
   const [currUser, loading, error] = useAuthState(auth);
   const nav = useNavigate();
@@ -33,14 +43,48 @@ function Dashboard() {
   }, [currUser, loading]);
   return (
     <>
-      <div className="menubar-holder">
-        <div className="menubar">
-          <div className="name">
-            Welcome, <span>{userName.substring(0, userName.indexOf(' '))}</span>
+      <div className="menubar">
+        <div className="name">
+          Welcome, <span>{userName.substring(0, userName.indexOf(' '))}</span>
+        </div>
+        <div className="page" >Dashboard</div>
+        <button className="burger" onClick={handleToggle} >
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+      <div className={`menuNav ${navbarOpen ? " showMenu" : " closeMenu"}`}>
+        <div className='menuButt-holder'>
+          <div className='top-holder'>
+            <h1>
+              Calendar
+            </h1>
+            <button className='x-button' onClick={closeMenu}>
+              <i class="bi bi-x-lg"></i>
+            </button>
           </div>
-          <div className="page">Dashboard</div>
-          <button className="logout-button" onClick={logout}>
-            Logout
+          <button className="menu-button" onClick={closeMenu}>
+            Home
+          </button>
+          <button className="menu-button" onClick={closeMenu}>
+            Weather
+          </button>
+          <button className="menu-button" onClick={closeMenu}>
+            Layouts
+          </button>
+          <button className="menu-button" onClick={closeMenu}>
+            Todo-List
+          </button>
+          <button className="menu-button" onClick={closeMenu}>
+            Photos
+          </button>
+          <button className="menu-button" onClick={closeMenu}>
+            Calendar
+          </button>
+          <button className="menu-button" onClick={closeMenu}>
+            News
+          </button>
+          <button className="menus-button special" onClick={logout}>
+            Log out
           </button>
         </div>
       </div>

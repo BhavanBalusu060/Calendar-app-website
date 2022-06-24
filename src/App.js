@@ -12,10 +12,10 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Sign/>}/>;
-        <Route path="/dash" element={<Dashboard/>}/>
-        <Route path="/register" element={<Register/>}/>
-        <Route path="/reset" element={<Reset/>}/> 
+        <Route path="/" element={<Sign />} />;
+        <Route path="/dash" element={<Dashboard />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/reset" element={<Reset />} />
       </Routes>
     </Router>
   );

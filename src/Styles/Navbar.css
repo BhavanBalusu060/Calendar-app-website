@@ -1,0 +1,167 @@
+* {
+    font-family: Helvetica;
+    font-weight: 200;
+}
+
+.menubar {
+    padding-top: 2vh;
+    height: 60px;
+    font-size: 20px;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    /* background: rgb(246, 242, 242); */
+    background: rgb(231, 234, 249);
+    display: flex;
+    flex-direction: row;
+}
+
+.name {
+    padding-top: 10px;
+    background: transparent;
+}
+
+.name span {
+    color: rgb(65, 91, 238);
+}
+
+.burger {
+    cursor: pointer;
+    padding: 5px 10px 5px 10px;
+    position: absolute;
+    background: transparent;
+    right: 2%;
+    color: black;
+    border: none;
+    font-size: 25px;
+    border-radius: 5px;
+}
+
+.burger:hover {
+    /* background: rgb(231, 228, 228); */
+    background: rgb(208, 215, 247);
+}
+
+.page {
+    padding-top: 10px;
+    position: absolute;
+    left: 45%;
+    background: transparent;
+}
+
+
+/* sdfsfd}*/
+.menuNav {
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    /* list-style: none; */
+    position: absolute;
+    top: 0;
+
+    width: 350px;
+    background: white;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 9;
+}
+
+.menuNav.showMenu {
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease-in;
+    box-shadow: 0px 1px 10px 1px rgb(129, 129, 131);
+}
+
+.menu-title {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu-title h1 {
+    font-weight: 900;
+    padding-left: 70px;
+    padding-right: 40vw;
+    color: #070707;
+}
+
+.menuNav.closeMenu {
+    right: 0;
+    transition: 0.2s ease-out;
+    width: 0%;
+}
+
+.menuNav button {
+    position: relative;
+    cursor: pointer;
+    border: none;
+}
+
+.menuButt-holder {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.menu-button {
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    margin: none;
+    height: 60px;
+    width: 100%;
+    background: transparent;
+}
+
+.menu-button:hover {
+    background: #ededed;
+}
+
+.menus-button.special {
+    font-size: 20px;
+    height: 40px;
+    /* background: linear-gradient(to right, #5c52edd7, #56a6eb); */
+    background: #5c52edd7;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: white;
+    margin-left: 10%;
+    width: 80%;
+    text-align: center;
+    border-radius: 10px;
+    /* box-shadow: 0px 2px 10px 2px rgb(254, 194, 227); */
+}
+
+.menus-button.special:hover {
+    /* background: linear-gradient(to right, #392de9d7, #2a8ade); */
+    background: #453cc7d7;
+}
+
+.top-holder {
+    display: flex;
+    flex-direction: row;
+}
+
+.top-holder h1 {
+    font-size: 23px;
+    padding: 20px;
+}
+
+.x-button {
+    margin-left: 140px;
+    font-size: 25px;
+    margin-bottom: 27px;
+    margin-top: 25px;
+    padding: 0 10px 0 10px;
+    border-radius: 10px;
+    background: transparent;
+}
+
+.x-button:hover {
+    background: #ededed;
+}
+
+.top-holder i {
+    padding: none;
+    margin: none;
+}

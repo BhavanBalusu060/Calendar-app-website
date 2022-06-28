@@ -1,10 +1,11 @@
 .event-input {
+    margin-left: 20px;
     display: flex;
     width: 50vw;
     flex-direction: column;
 }
 
-.event.times  {
+.event.times {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -21,7 +22,7 @@
 }
 
 .event-input input {
-    border: 1px solid rgba(0,0,0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     margin-bottom: 2vh;
 }
 
@@ -43,7 +44,7 @@
     color: white;
     padding-left: 1em;
     padding-right: 1em;
-    margin-bottom:2em;
+    margin-bottom: 2em;
     box-shadow: 0px 5px 20px 5px rgb(196, 147, 221);
     transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }

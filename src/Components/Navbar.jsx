@@ -6,7 +6,7 @@ import { auth, db, logout } from '../firebase';
 import '../Styles/Navbar.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-function Navbar() {
+function Navbar(props) {
     const [navbarOpen, setNavbarOpen] = useState(false);
     const handleToggle = () => {
         setNavbarOpen(prev => !prev)
@@ -47,9 +47,9 @@ function Navbar() {
                 <div className="name">
                     Welcome, <span>{userName.substring(0, userName.indexOf(' '))}</span>
                 </div>
-                <div className="page" >Dashboard</div>
+                <div className="page" >{props.title}</div>
                 <button className="burger" onClick={handleToggle} >
-                    <i class="bi bi-list"></i>
+                    <i className="bi bi-list"></i>
                 </button>
             </div>
             <div className={`menuNav ${navbarOpen ? " showMenu" : " closeMenu"}`}>
@@ -59,7 +59,7 @@ function Navbar() {
                             Calendar
                         </h1>
                         <button className='x-button' onClick={closeMenu}>
-                            <i class="bi bi-x-lg"></i>
+                            <i className="bi bi-x-lg"></i>
                         </button>
                     </div>
                     <button className="menu-button" onClick={closeMenu}>

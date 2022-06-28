@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import Input from './Components/Input';
+import './Defaults.css'
+import SignIn from './Components/SignIn';
 import App from './App';
+import Events from './Components/Events';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

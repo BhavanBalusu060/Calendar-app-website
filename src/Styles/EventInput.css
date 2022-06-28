@@ -65,3 +65,13 @@
     background-color: rgb(124, 94, 213);
     cursor: pointer;
 }
+
+.invalidData {
+    font-weight: 500;
+    align-self: center;
+    color: red;
+}
+
+.red-border {
+    border: 1px solid red;
+}

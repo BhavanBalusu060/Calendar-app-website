@@ -24,35 +24,32 @@ export default function Input() {
     function submitData(e) {
         let valid = false;
         e.preventDefault();
+
+        console.log("SUBMITTED!")
         
         if (name !== '' && timeCorrect(startTime) && (startTime  !== '' && timeCorrect(endTime))) {
             valid = true;
         }
 
+        console.log('valid is ' + valid)
+
         if (valid === true) {
             // submit form 
         } else {
-            // ask to redo components
+            if (!timeCorrect(startTime)) {
+                const sTime = document.querySelector("#startTime")
+            }
         }
 
     }
 
     function timeCorrect(time) {
-        if (time.indexOf(":") !== -1 && (time.indexOf("am") -1 || time.indexOf("pm") !== -1))
+        console.log(time);
+        if ((time.indexOf("am") === -1 && !time.indexOf("pm") === -1) || (!time.indexOf("am") === -1 && time.indexOf("pm") === -1)) {
             return false;
-        
-        const hr = time.substring(0, time.indexOf(":"));
-        const min = time.substring(time.indexOf(":"), time.indexOf(" "));
+        }
 
-        if (hr.length() !== 2 || min.length() !== 2) 
-            return false;
-        
-        if (parseInt(hr) > 12 || parseInt(hr) < 1 || parseInt(min) > 59 || parseInt(min) < 0)
-            return false;
-
-        
         return true;
-
     }
     
     return (
@@ -61,7 +58,7 @@ export default function Input() {
             <input type="text" onChange={e => setDetails(e.target.value)} className="event details" placeholder="Details"/>
             <SelectDatepicker selectedDate={day} onDateChange={onDateChange} className="event date"/> 
             <div className="event times">
-                <input type="text" onChange={e => setStartTime(e.target.value)} className="event time" placeholder="Starting time (hh:mm am/pm)" />
+                <input type="text" onChange={e => setStartTime(e.target.value)} className="event time" id ="startTime" placeholder="Starting time (hh:mm am/pm)" />
                 <input type="text" onChange={e => setEndTime(e.target.value)} className="event time" placeholder="Ending time (hh:mm am/pm)" />
             </div>
             

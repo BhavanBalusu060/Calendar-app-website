@@ -40,18 +40,21 @@ export default function Input() {
         } else {
             if (name === '') {
                 const nameElement = document.querySelector("#eventName");
-                nameElement.style.border = '1px solid red'
+                nameElement.style.border = '2px solid red'
             }
 
             if (!timeCorrect(startTime)) {
                 const timeElement = document.querySelector('#startTime')
-                timeElement.style.border = '1px solid red'
+                timeElement.style.border = '2px solid red'
             }
 
             if (endTime !== '' && !timeCorrect(endTime)) {
                 const timeElement = document.querySelector('#endTime')
-                timeElement.style.border = '1px solid red'
+                timeElement.style.border = '2px solid red'
             }
+
+            const invalid = document.querySelector(".invalidData");
+            invalid.style.display = 'block';
         }
 
     }

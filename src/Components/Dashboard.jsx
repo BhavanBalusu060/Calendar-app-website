@@ -1,12 +1,11 @@
 import React from 'react';
-import Input from './Input';
+import Input from '../Pages/Events';
 import Navbar from './Navbar'
 
-function Dashboard() {
+function Dashboard(props) {
   return (
     <div>
-      <Navbar />
-      U SUCK
+      <Navbar title={props.title} />
     </div>
   );
 }

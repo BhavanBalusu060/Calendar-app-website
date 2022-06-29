@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { query, collection, getDocs, where } from 'firebase/firestore';
 import { auth, db, logout } from '../firebase';
 import '../Styles/Navbar.css';
@@ -33,6 +33,13 @@ function Navbar(props) {
         }
     };
 
+    const navigate = (direction) => {
+        console.log("/" + direction)
+        nav("/" + direction);
+        closeMenu();
+        return;
+    }
+
     useEffect(() => {
         if (loading) {
             // future implementation of loading screen
@@ -40,7 +47,11 @@ function Navbar(props) {
         }
         if (!currUser) return nav('/');
         fetchUserName();
+
+
     }, [currUser, loading]);
+
+
     return (
         <>
             <div className="menubar">
@@ -62,25 +73,25 @@ function Navbar(props) {
                             <i className="bi bi-x-lg"></i>
                         </button>
                     </div>
-                    <button className="menu-button" onClick={closeMenu}>
+                    <button className="menu-button" onClick={() => { navigate("dash") }}>
                         Home
                     </button>
-                    <button className="menu-button" onClick={closeMenu}>
+                    <button className="menu-button" onClick={() => { navigate("weather") }}>
                         Weather
                     </button>
-                    <button className="menu-button" onClick={closeMenu}>
+                    <button className="menu-button" onClick={() => { navigate("Layouts") }}>
                         Layouts
                     </button>
-                    <button className="menu-button" onClick={closeMenu}>
-                        Todo-List
+                    <button className="menu-button" onClick={() => { navigate("events") }}>
+                        Events
                     </button>
-                    <button className="menu-button" onClick={closeMenu}>
+                    <button className="menu-button" onClick={() => { navigate("photo") }}>
                         Photos
                     </button>
-                    <button className="menu-button" onClick={closeMenu}>
+                    <button className="menu-button" onClick={() => { navigate("calendar") }}>
                         Calendar
                     </button>
-                    <button className="menu-button" onClick={closeMenu}>
+                    <button className="menu-button" onClick={() => { navigate("news") }}>
                         News
                     </button>
                     <button className="menus-button special" onClick={logout}>

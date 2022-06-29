@@ -106,6 +106,7 @@
 }
 
 .menu-button {
+    text-decoration: none;
     text-align: center;
     color: black;
     font-size: 20px;
@@ -146,11 +147,12 @@
 
 .top-holder h1 {
     font-size: 23px;
-    padding: 20px;
+    padding-top: 25px;
+    padding-left: 60px;
 }
 
 .x-button {
-    margin-left: 140px;
+    margin-left: 120px;
     font-size: 25px;
     margin-bottom: 27px;
     margin-top: 15px;

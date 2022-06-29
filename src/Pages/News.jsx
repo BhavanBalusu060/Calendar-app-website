@@ -3,7 +3,7 @@ import React from 'react'
 function News() {
     return (
         <div>
-            sds
+            Bhavan ur an idiot
         </div>
     );
 }

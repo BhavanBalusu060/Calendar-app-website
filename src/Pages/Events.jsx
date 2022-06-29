@@ -23,22 +23,14 @@ export default function Input() {
 
     function submitData(e) {
         e.preventDefault();
-<<<<<<< HEAD:src/Pages/Events.jsx
-
-        console.log("SUBMITTED!")
-
-        if (name !== '' && timeCorrect(startTime) && (startTime !== '' && timeCorrect(endTime))) {
-            valid = true;
-=======
         let valid = true;
-        
+
         if (name === '' || !timeCorrect(startTime)) {
             valid = false;
         }
 
         if (endTime !== '' && !timeCorrect(endTime)) {
             valid = false;
->>>>>>> 3bbf4ee4bc29f6b3f5257b127fdb9f122358f8e5:src/Components/Input.jsx
         }
 
         console.log('valid is ' + valid)
@@ -73,7 +65,7 @@ export default function Input() {
         for (let i = 0; i < num.length; i++) {
             let valid = false;
             for (let j = 0; j < nums.length; j++) {
-                if (num.substring(i, i+1) === nums[j]) {
+                if (num.substring(i, i + 1) === nums[j]) {
                     valid = true;
                 }
             }
@@ -85,13 +77,6 @@ export default function Input() {
     }
 
     function timeCorrect(time) {
-<<<<<<< HEAD:src/Pages/Events.jsx
-        console.log(time);
-        if ((time.indexOf("am") === -1 && !time.indexOf("pm") === -1) || (!time.indexOf("am") === -1 && time.indexOf("pm") === -1)) {
-            return false;
-        }
-
-=======
         if (time.indexOf("am") === -1 && time.indexOf("pm") === -1) {
             return false;
         }
@@ -115,23 +100,17 @@ export default function Input() {
         if (min > 60 || min < 0) return false;
 
 
->>>>>>> 3bbf4ee4bc29f6b3f5257b127fdb9f122358f8e5:src/Components/Input.jsx
         return true;
     }
 
     return (
         <form action="" onSubmit={e => submitData(e)} className="event-input">
-            <input type="text" onChange={e => {e.preventDefault(); setName(e.target.value)}} className="event name" id="eventName"placeholder="Name" />
-            <textarea className="event details" onChange={e => {e.preventDefault(); setDetails(e.target.value)}} placeholder="Details"></textarea>
+            <input type="text" onChange={e => { e.preventDefault(); setName(e.target.value) }} className="event name" id="eventName" placeholder="Name" />
+            <textarea className="event details" onChange={e => { e.preventDefault(); setDetails(e.target.value) }} placeholder="Details"></textarea>
             <SelectDatepicker selectedDate={day} onDateChange={onDateChange} className="event date" />
             <div className="event times">
-<<<<<<< HEAD:src/Pages/Events.jsx
-                <input type="text" onChange={e => setStartTime(e.target.value)} className="event time" id="startTime" placeholder="Starting time (hh:mm am/pm)" />
-                <input type="text" onChange={e => setEndTime(e.target.value)} className="event time" placeholder="Ending time (hh:mm am/pm)" />
-=======
-                <input type="text" onChange={e => {e.preventDefault(); setStartTime(e.target.value)}} className="event time" id ="startTime" placeholder="Starting time (hh:mm am/pm)" />
-                <input type="text" onChange={e => {e.preventDefault(); setEndTime(e.target.value)}} className="event time" id="endTime" placeholder="Ending time (hh:mm am/pm)" />
->>>>>>> 3bbf4ee4bc29f6b3f5257b127fdb9f122358f8e5:src/Components/Input.jsx
+                <input type="text" onChange={e => { e.preventDefault(); setStartTime(e.target.value) }} className="event time" id="startTime" placeholder="Starting time (hh:mm am/pm)" />
+                <input type="text" onChange={e => { e.preventDefault(); setEndTime(e.target.value) }} className="event time" id="endTime" placeholder="Ending time (hh:mm am/pm)" />
             </div>
 
             <button type="submit">Submit</button>

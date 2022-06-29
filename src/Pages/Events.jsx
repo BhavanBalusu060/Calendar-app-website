@@ -25,19 +25,33 @@ export default function Input() {
         let valid = false;
         e.preventDefault();
 
+<<<<<<< HEAD
+        console.log("SUBMITTED!")
+        
+        if (name !== '' && timeCorrect(startTime) && (startTime  !== '' && timeCorrect(endTime))) {
+=======
         if (name !== '' && timeCorrect(startTime) && (startTime !== '' && timeCorrect(endTime))) {
+>>>>>>> 1b9eeec647998b1a07db5e4f53e0898bb776a933
             valid = true;
         }
+
+        console.log('valid is ' + valid)
 
         if (valid === true) {
             // submit form 
         } else {
-            // ask to redo components
+            if (!timeCorrect(startTime)) {
+                const sTime = document.querySelector("#startTime")
+            }
         }
 
     }
 
     function timeCorrect(time) {
+<<<<<<< HEAD
+        console.log(time);
+        if ((time.indexOf("am") === -1 && !time.indexOf("pm") === -1) || (!time.indexOf("am") === -1 && time.indexOf("pm") === -1)) {
+=======
         if (time.indexOf(":") !== -1 && (time.indexOf("am") - 1 || time.indexOf("pm") !== -1))
             return false;
 
@@ -48,11 +62,15 @@ export default function Input() {
             return false;
 
         if (parseInt(hr) > 12 || parseInt(hr) < 1 || parseInt(min) > 59 || parseInt(min) < 0)
+>>>>>>> 1b9eeec647998b1a07db5e4f53e0898bb776a933
             return false;
+        }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 1b9eeec647998b1a07db5e4f53e0898bb776a933
         return true;
-
     }
 
     return (
@@ -61,7 +79,7 @@ export default function Input() {
             <input type="text" onChange={e => setDetails(e.target.value)} className="event details" placeholder="Details" />
             <SelectDatepicker selectedDate={day} onDateChange={onDateChange} className="event date" />
             <div className="event times">
-                <input type="text" onChange={e => setStartTime(e.target.value)} className="event time" placeholder="Starting time (hh:mm am/pm)" />
+                <input type="text" onChange={e => setStartTime(e.target.value)} className="event time" id ="startTime" placeholder="Starting time (hh:mm am/pm)" />
                 <input type="text" onChange={e => setEndTime(e.target.value)} className="event time" placeholder="Ending time (hh:mm am/pm)" />
             </div>
 

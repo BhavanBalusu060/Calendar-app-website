@@ -13,6 +13,7 @@
 
 .event.times input {
     width: 20vw;
+    padding-left: 1vw;
 }
 
 .event.name {
@@ -28,7 +29,14 @@
 
 .event.details {
     padding-bottom: 44vh;
-    padding-top: 1vh;
+    padding-top: 1vw;
+    padding-left: 1vw;
+    border-radius: 0.5em;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 20px 5px rgb(199, 194, 194);
+    resize: none;
+    font-size: 15px;
+    margin-bottom: 2vh;
 }
 
 

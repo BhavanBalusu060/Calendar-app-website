@@ -22,17 +22,15 @@ export default function Input() {
     const [endTime, setEndTime] = useState('');
 
     function submitData(e) {
-        let valid = false;
         e.preventDefault();
-
-<<<<<<< HEAD
-        console.log("SUBMITTED!")
+        let valid = true;
         
-        if (name !== '' && timeCorrect(startTime) && (startTime  !== '' && timeCorrect(endTime))) {
-=======
-        if (name !== '' && timeCorrect(startTime) && (startTime !== '' && timeCorrect(endTime))) {
->>>>>>> 1b9eeec647998b1a07db5e4f53e0898bb776a933
-            valid = true;
+        if (name === '' || !timeCorrect(startTime)) {
+            valid = false;
+        }
+
+        if (endTime !== '' && !timeCorrect(endTime)) {
+            valid = false;
         }
 
         console.log('valid is ' + valid)
@@ -40,47 +38,76 @@ export default function Input() {
         if (valid === true) {
             // submit form 
         } else {
+            if (name === '') {
+                const nameElement = document.querySelector("#eventName");
+                nameElement.style.border = '1px solid red'
+            }
+
             if (!timeCorrect(startTime)) {
-                const sTime = document.querySelector("#startTime")
+                const timeElement = document.querySelector('#startTime')
+                timeElement.style.border = '1px solid red'
+            }
+
+            if (endTime !== '' && !timeCorrect(endTime)) {
+                const timeElement = document.querySelector('#endTime')
+                timeElement.style.border = '1px solid red'
             }
         }
 
     }
 
+    function isNumber(num) {
+        const nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+        for (let i = 0; i < num.length; i++) {
+            let valid = false;
+            for (let j = 0; j < nums.length; j++) {
+                if (num.substring(i, i+1) === nums[j]) {
+                    valid = true;
+                }
+            }
+
+            if (valid === false) return false;
+        }
+
+        return true;
+    }
+
     function timeCorrect(time) {
-<<<<<<< HEAD
-        console.log(time);
-        if ((time.indexOf("am") === -1 && !time.indexOf("pm") === -1) || (!time.indexOf("am") === -1 && time.indexOf("pm") === -1)) {
-=======
-        if (time.indexOf(":") !== -1 && (time.indexOf("am") - 1 || time.indexOf("pm") !== -1))
-            return false;
-
-        const hr = time.substring(0, time.indexOf(":"));
-        const min = time.substring(time.indexOf(":"), time.indexOf(" "));
-
-        if (hr.length() !== 2 || min.length() !== 2)
-            return false;
-
-        if (parseInt(hr) > 12 || parseInt(hr) < 1 || parseInt(min) > 59 || parseInt(min) < 0)
->>>>>>> 1b9eeec647998b1a07db5e4f53e0898bb776a933
+        if (time.indexOf("am") === -1 && time.indexOf("pm") === -1) {
             return false;
         }
 
-<<<<<<< HEAD
-=======
+        if (time.indexOf(":") === -1) {
+            return false;
+        }
 
->>>>>>> 1b9eeec647998b1a07db5e4f53e0898bb776a933
+        if (!isNumber(time.substring(0, time.indexOf(":"))) || !isNumber(time.substring(time.indexOf(":") + 1, time.indexOf(":") + 3))) {
+            return false;
+        }
+
+        let hr = parseInt(time.substring(0, time.indexOf(":")));
+        let min = parseInt(time.substring(time.indexOf(":") + 1, time.indexOf(":") + 3));
+
+        if (isNaN(hr) || isNaN(min)) {
+            return false;
+        }
+
+        if (hr > 12 || hr <= 0) return false;
+        if (min > 60 || min < 0) return false;
+
+
         return true;
     }
 
     return (
         <form action="" onSubmit={e => submitData(e)} className="event-input">
-            <input type="text" onChange={e => setName(e.target.value)} className="event name" placeholder="Name" />
-            <input type="text" onChange={e => setDetails(e.target.value)} className="event details" placeholder="Details" />
+            <input type="text" onChange={e => {e.preventDefault(); setName(e.target.value)}} className="event name" id="eventName"placeholder="Name" />
+            <textarea className="event details" onChange={e => {e.preventDefault(); setDetails(e.target.value)}} placeholder="Details"></textarea>
             <SelectDatepicker selectedDate={day} onDateChange={onDateChange} className="event date" />
             <div className="event times">
-                <input type="text" onChange={e => setStartTime(e.target.value)} className="event time" id ="startTime" placeholder="Starting time (hh:mm am/pm)" />
-                <input type="text" onChange={e => setEndTime(e.target.value)} className="event time" placeholder="Ending time (hh:mm am/pm)" />
+                <input type="text" onChange={e => {e.preventDefault(); setStartTime(e.target.value)}} className="event time" id ="startTime" placeholder="Starting time (hh:mm am/pm)" />
+                <input type="text" onChange={e => {e.preventDefault(); setEndTime(e.target.value)}} className="event time" id="endTime" placeholder="Ending time (hh:mm am/pm)" />
             </div>
 
             <button type="submit">Submit</button>

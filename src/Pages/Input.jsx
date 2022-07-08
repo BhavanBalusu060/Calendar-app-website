@@ -1,8 +1,25 @@
 import { useCallback, useState } from "react";
 import { SelectDatepicker } from "react-select-datepicker";
 import '../Styles/EventInput.css'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, db } from '../firebase';
+import { doc, setDoc, collection, where, query, getDocs } from "firebase/firestore";
+
 
 export default function Input() {
+
+    const [currUser, loading] = useAuthState(auth);
+
+    /// THIS IS FOR ADDING EVENTS TO THE DATABASE
+
+    // try {
+    //     await setDoc(doc(db, "users", userName, "events", "doc3"), {
+    //         name: "testing",
+    //         details: "RANDOM STUFF",
+    //     });
+    // } catch (err) {
+    //     console.log(err);
+    // }
 
 
     const [name, setName] = useState("")
@@ -17,7 +34,7 @@ export default function Input() {
         mins: 0
     });
 
-    function submitData(e) {
+    async function submitData(e) {
         e.preventDefault();
         let valid = true;
 
@@ -37,7 +54,29 @@ export default function Input() {
                 duration: duration
             }
 
-            console.log(eventObject)
+            let userName = ''
+            try {
+                const q = query(
+                    collection(db, 'users'),
+                    where('uid', '==', currUser?.uid)
+                );
+                const userDoc = await getDocs(q);
+                const data = userDoc.docs[0].data();
+                console.log(data)
+                userName = data.name;
+                console.log(userName + " is the user name");
+
+                try {
+                    await setDoc(doc(db, "users", "mareshwarandesi", "events", `EVENT ${eventObject.name}`), eventObject);
+                } catch (err) {
+                    console.log(err);
+                }
+
+            } catch (err) {
+                alert('An error had occurred while fetching the users name');
+                console.log(err)
+                return;
+            }
 
             const invalid = document.querySelector(".invalidData");
             invalid.style.display = 'none';

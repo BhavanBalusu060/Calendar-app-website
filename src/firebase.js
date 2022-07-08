@@ -16,6 +16,8 @@ import {
 	collection,
 	where,
 	addDoc,
+	setDoc,
+	doc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -45,13 +47,14 @@ const register = async (name, email, password) => {
 	try {
 		const res = await createUserWithEmailAndPassword(auth, email, password);
 		const user = res.user;
-		await addDoc(collection(db, "users"), {
+		await setDoc(doc(db, "users", name), {
 			uid: user.uid,
 			name,
 			authProvider: "local",
 			email,
 		});
 	} catch (err) {
+		console.log(err);
 		alert(
 			"Make sure all fields are filled in correctly/This email is already in use"
 		);

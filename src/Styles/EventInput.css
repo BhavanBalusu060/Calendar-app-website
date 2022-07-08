@@ -1,85 +1,119 @@
 .event-input {
-    margin-left: 20px;
-    display: flex;
-    width: 50vw;
-    flex-direction: column;
+	margin-left: 20px;
+	display: flex;
+	width: 50vw;
+	flex-direction: column;
 }
 
 .event.times {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
-.event.times input {
-    width: 20vw;
-    padding-left: 1vw;
+.event.timings {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.event.timings label {
+	margin-top: 10px;
+}
+
+.event.timings #startTime {
+	width: 30%;
+}
+
+.event.duration {
+	width: 50%;
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	justify-content: space-between;
+}
+
+.event.duration input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.event.duration input[type="number"] {
+	-moz-appearance: textfield;
 }
 
 .event.name {
-    margin-top: 2vh;
-    padding: 0.1vh;
-    padding-left: 1vw;
+	margin-top: 2vh;
+	padding: 0.1vh;
+	padding-left: 1vw;
+}
+
+.event.duration #duration-hours {
+	width: 35%;
+}
+
+.event.duration #duration-minutes {
+	width: 35%;
 }
 
 .event-input input {
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    margin-bottom: 2vh;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	margin-bottom: 2vh;
 }
 
 .event.details {
-    padding-bottom: 44vh;
-    padding-top: 1vw;
-    padding-left: 1vw;
-    border-radius: 0.5em;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 5px 20px 5px rgb(199, 194, 194);
-    resize: none;
-    font-size: 15px;
-    margin-bottom: 2vh;
+	padding-bottom: 44vh;
+	padding-top: 1vw;
+	padding-left: 1vw;
+	border-radius: 0.5em;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 5px 20px 5px rgb(199, 194, 194);
+	resize: none;
+	font-size: 15px;
+	margin-bottom: 2vh;
 }
 
-
 .event-input button {
-    width: 100%;
-    align-self: center;
+	width: 100%;
+	align-self: center;
 
-    font-size: 1em;
-    border: none;
-    border-radius: 0.5em;
-    height: 45px;
-    background: rgb(134, 104, 223);
-    color: white;
-    padding-left: 1em;
-    padding-right: 1em;
-    margin-bottom: 2em;
-    box-shadow: 0px 5px 20px 5px rgb(196, 147, 221);
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+	font-size: 1em;
+	border: none;
+	border-radius: 0.5em;
+	height: 45px;
+	background: rgb(134, 104, 223);
+	color: white;
+	padding-left: 1em;
+	padding-right: 1em;
+	margin-bottom: 2em;
+	box-shadow: 0px 5px 20px 5px rgb(196, 147, 221);
+	transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .event-input select {
-    width: calc(43.2vw/3);
-    margin-right: calc(10vw/3);
-    margin-bottom: 2vh;
-    background-color: white;
-    border: none;
-    border-radius: 0.5em;
-    height: 3vh;
-    box-shadow: 0px 5px 20px 5px rgb(199, 194, 194);
-    padding-left: 1vw;
-
+	width: calc(43.2vw / 3);
+	margin-right: calc(10vw / 3);
+	margin-bottom: 2vh;
+	background-color: white;
+	border: none;
+	border-radius: 0.5em;
+	height: 3vh;
+	box-shadow: 0px 5px 20px 5px rgb(199, 194, 194);
+	padding-left: 1vw;
 }
 
 .event-input button:hover {
-    background-color: rgb(124, 94, 213);
-    cursor: pointer;
+	background-color: rgb(124, 94, 213);
+	cursor: pointer;
 }
 
 .invalidData {
-    font-weight: 500;
-    align-self: center;
-    color: red;
+	font-weight: 500;
+	align-self: center;
+	color: red;
 
-    display: none;
-    transition: all 2s ease;
+	display: none;
+	transition: all 2s ease;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import Input from '../Pages/Events';
 import Navbar from './Navbar'
 
 function Dashboard(props) {

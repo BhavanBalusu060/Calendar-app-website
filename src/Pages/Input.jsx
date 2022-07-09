@@ -10,17 +10,6 @@ export default function Input() {
 
     const [currUser, loading] = useAuthState(auth);
 
-    /// THIS IS FOR ADDING EVENTS TO THE DATABASE
-
-    // try {
-    //     await setDoc(doc(db, "users", userName, "events", "doc3"), {
-    //         name: "testing",
-    //         details: "RANDOM STUFF",
-    //     });
-    // } catch (err) {
-    //     console.log(err);
-    // }
-
 
     const [name, setName] = useState("")
     const [details, setDetails] = useState("")
@@ -42,14 +31,13 @@ export default function Input() {
             valid = false;
         }
 
-        console.log('valid is ' + valid)
 
         if (valid === true) {
             // submit form 
             const eventObject = {
                 name: name,
                 details: details,
-                day: day,
+                day: day.getMonth() + "/" + day.getDay() + "/" + day.getFullYear(),
                 start_time: startTime,
                 duration: duration
             }
@@ -62,19 +50,17 @@ export default function Input() {
                 );
                 const userDoc = await getDocs(q);
                 const data = userDoc.docs[0].data();
-                console.log(data)
+                const stuff = userDoc.docs[0].id;
                 userName = data.name;
-                console.log(userName + " is the user name");
 
                 try {
-                    await setDoc(doc(db, "users", "mareshwarandesi", "events", `EVENT ${eventObject.name}`), eventObject);
+                    await setDoc(doc(db, "users", stuff, "events", `EVENT ${eventObject.name}`), eventObject);
                 } catch (err) {
-                    console.log(err);
+                    alert('An error occured in adding the event.')
                 }
 
             } catch (err) {
                 alert('An error had occurred while fetching the users name');
-                console.log(err)
                 return;
             }
 
@@ -101,8 +87,6 @@ export default function Input() {
     function isNumber(num) {
         const nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-        console.log(num);
-
         for (let i = 0; i < num.length; i++) {
             let valid = false;
             for (let j = 0; j < nums.length; j++) {
@@ -118,7 +102,6 @@ export default function Input() {
 
     function timeCorrect(time) {
         time = time.toLowerCase();
-        console.log(time);
         if (time.indexOf("am") === -1 && time.indexOf("pm") === -1) {
             return false;
         }

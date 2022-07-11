@@ -35,7 +35,7 @@ export default function EventsHolder() {
         })
 
         if (user !== '') {
-            const q = query(collection(db, 'users', "Anurag Chillarige", 'events'))
+            const q = query(collection(db, 'users', user, 'events'))
             const unsub = onSnapshot(q, (querySnapshot) => {
                 let eventsArr = []
                 querySnapshot.forEach(event => {

@@ -1,7 +1,5 @@
-import React, { useState } from "react";
 import { initializeApp } from "firebase/app";
 import {
-	GoogleAuthProvider,
 	getAuth,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
@@ -9,17 +7,7 @@ import {
 	signOut,
 } from "firebase/auth";
 
-import {
-	getFirestore,
-	query,
-	getDocs,
-	collection,
-	where,
-	addDoc,
-	setDoc,
-	doc,
-} from "firebase/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { getFirestore, setDoc, doc } from "firebase/firestore";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyBoJ9qNhK4N6NwhwCGuLY1bVlpzZEmyMI0",

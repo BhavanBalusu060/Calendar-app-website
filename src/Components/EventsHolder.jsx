@@ -1,13 +1,13 @@
 // this file is for holding all of the events 
 import { useEffect, useState } from "react";
 import { db, auth } from "../firebase";
-import { collection, query, doc, onSnapshot, where, getDocs } from "firebase/firestore";
+import { collection, query, onSnapshot, where, getDocs } from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Event from "./Event";
 
 export default function EventsHolder() {
 
-    const [currUser, loading] = useAuthState(auth)
+    const [currUser] = useAuthState(auth)
     const [events, setEvents] = useState([])
     const [user, setUser] = useState('')
 
@@ -49,7 +49,7 @@ export default function EventsHolder() {
             return () => unsub;
         }
 
-    }, [])
+    })
 
     return (
         <div>

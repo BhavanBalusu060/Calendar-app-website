@@ -9,7 +9,7 @@ import EventsHolder from "../Components/EventsHolder";
 
 export default function Input() {
 
-    const [currUser, loading] = useAuthState(auth);
+    const [currUser] = useAuthState(auth);
 
 
     const [name, setName] = useState("")

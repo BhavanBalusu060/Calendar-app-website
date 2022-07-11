@@ -27,7 +27,6 @@ function Navbar(props) {
             );
             const doc = await getDocs(q);
             const data = doc.docs[0].data();
-            console.log(data);
             setName(data.name);
         } catch (err) {
             alert('An error had occurred while fetching the users name');

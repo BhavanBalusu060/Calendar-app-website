@@ -19,6 +19,7 @@ import {
 	setDoc,
 	doc,
 } from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyBoJ9qNhK4N6NwhwCGuLY1bVlpzZEmyMI0",

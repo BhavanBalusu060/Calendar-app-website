@@ -4,6 +4,7 @@ import '../Styles/EventInput.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebase';
 import { doc, setDoc, collection, where, query, getDocs } from "firebase/firestore";
+import EventsHolder from "../Components/EventsHolder";
 
 
 export default function Input() {
@@ -37,24 +38,21 @@ export default function Input() {
             const eventObject = {
                 name: name,
                 details: details,
-                day: day.getMonth() + "/" + day.getDay() + "/" + day.getFullYear(),
+                day: (day.getMonth() + 1) + "/" + day.getDate() + "/" + day.getFullYear(),
                 start_time: startTime,
                 duration: duration
             }
 
-            let userName = ''
             try {
                 const q = query(
                     collection(db, 'users'),
                     where('uid', '==', currUser?.uid)
                 );
                 const userDoc = await getDocs(q);
-                const data = userDoc.docs[0].data();
-                const stuff = userDoc.docs[0].id;
-                userName = data.name;
+                const docID = userDoc.docs[0].id;
 
                 try {
-                    await setDoc(doc(db, "users", stuff, "events", `EVENT ${eventObject.name}`), eventObject);
+                    await setDoc(doc(db, "users", docID, "events", `EVENT ${eventObject.name}`), eventObject);
                 } catch (err) {
                     alert('An error occured in adding the event.')
                 }
@@ -158,25 +156,30 @@ export default function Input() {
     }
 
     return (
-        <form action="" onSubmit={e => submitData(e)} className="event-input">
-            <input type="text" onChange={e => { e.preventDefault(); setName(e.target.value); setDefaultBorder(e) }} className="event name" id="eventName" placeholder="Name" />
-            <textarea className="event details" onChange={e => { e.preventDefault(); setDetails(e.target.value); setDefaultBorder(e) }} placeholder="Details"></textarea>
-            <SelectDatepicker selectedDate={day} onDateChange={onDateChange} className="event date" />
+        <>
+            <form action="" onSubmit={e => submitData(e)} className="event-input">
+                <input type="text" onChange={e => { e.preventDefault(); setName(e.target.value); setDefaultBorder(e) }} className="event name" id="eventName" placeholder="Name" />
+                <textarea className="event details" onChange={e => { e.preventDefault(); setDetails(e.target.value); setDefaultBorder(e) }} placeholder="Details"></textarea>
+                <SelectDatepicker selectedDate={day} onDateChange={onDateChange} className="event date" />
 
-            <div className="event timings">
-                <input type="text" onChange={e => { e.preventDefault(); setStartTime(e.target.value); setDefaultBorder(e) }} className="event time" id="startTime" placeholder="Time (hh:mm am/pm)" />
-                <label htmlFor="duration">Duration:</label>
-                <div className="event duration">
-                    <input name="duration" type="number" id="duration-hours" min="0" placeholder="Hours"
-                        onChange={e => { e.preventDefault(); setDuration({ hours: e.target.value, mins: duration.mins }) }} />
-                    <input type="number" id="duration-minutes" min="0" max="59" placeholder="Minutes"
-                        onChange={e => { e.preventDefault(); setDuration({ hours: duration.hours, mins: e.target.value }) }} />
+                <div className="event timings">
+                    <input type="text" onChange={e => { e.preventDefault(); setStartTime(e.target.value); setDefaultBorder(e) }} className="event time" id="startTime" placeholder="Time (hh:mm am/pm)" />
+                    <label htmlFor="duration">Duration:</label>
+                    <div className="event duration">
+                        <input name="duration" type="number" id="duration-hours" min="0" placeholder="Hours"
+                            onChange={e => { e.preventDefault(); setDuration({ hours: e.target.value, mins: duration.mins }) }} />
+                        <input type="number" id="duration-minutes" min="0" max="59" placeholder="Minutes"
+                            onChange={e => { e.preventDefault(); setDuration({ hours: duration.hours, mins: e.target.value }) }} />
+                    </div>
                 </div>
-            </div>
 
-            <button type="submit">Submit</button>
-            <p className="invalidData">Error: Invalid Data!</p>
-        </form>
+                <button type="submit">Submit</button>
+                <p className="invalidData">Error: Invalid Data!</p>
+            </form>
+
+            <EventsHolder />
+        </>
+
     )
 
 

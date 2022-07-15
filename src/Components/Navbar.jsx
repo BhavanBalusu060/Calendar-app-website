@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate, Link } from 'react-router-dom';
-import { query, collection, getDocs, where } from 'firebase/firestore';
+import { query, collection, getDocs, where, doc, setDoc } from 'firebase/firestore';
 import { auth, db, logout } from '../firebase';
 import '../Styles/Navbar.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -33,6 +33,7 @@ function Navbar(props) {
         }
     };
 
+
     const navigate = (direction) => {
         console.log("/" + direction)
         nav("/" + direction);
@@ -56,7 +57,7 @@ function Navbar(props) {
         <>
             <div className="menubar">
                 <div className="name">
-                    Welcome, <span>{userName.substring(0, userName.indexOf(' '))}</span>
+                    Welcome, <span>{userName.indexOf(" ") !== -1 ? userName.substring(0, userName.indexOf(" ")) : userName}</span>
                 </div>
                 <div className="page" >{props.title}</div>
                 <button className="burger" onClick={handleToggle} >

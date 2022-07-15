@@ -159,7 +159,9 @@ export default function Input() {
         <>
             <form action="" onSubmit={e => submitData(e)} className="event-input">
                 <input type="text" onChange={e => { e.preventDefault(); setName(e.target.value); setDefaultBorder(e) }} className="event name" id="eventName" placeholder="Name" />
+
                 <textarea className="event details" onChange={e => { e.preventDefault(); setDetails(e.target.value); setDefaultBorder(e) }} placeholder="Details"></textarea>
+
                 <SelectDatepicker selectedDate={day} onDateChange={onDateChange} className="event date" />
 
                 <div className="event timings">

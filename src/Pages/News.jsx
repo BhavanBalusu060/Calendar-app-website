@@ -1,43 +1,38 @@
 import React, { useState, useEffect } from 'react'
-import ReactDOM from 'react-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, db } from '../firebase';
+import { doc, setDoc, collection, where, query, getDocs } from "firebase/firestore";
 
 function News() {
-
-    const [rss, setRss] = useState({})
+    const [currUser] = useAuthState(auth)
     const [link, setLink] = useState("")
+    console.log(link)
 
-    useEffect(() => {
-        fetch("/rssFeed")
-            .catch(() => { alert("Can't retrieve rss feed link") })
-            .then(
-                res => res.json()
-            ).then(
-                data => {
-                    setRss(data)
-                    console.log(data)
-                }
-            )
-    }, [])
+    function submitData(e) {
+        const linkObject = {
+            link: link
+        }
+        try {
+            const q = query(
+                collection(db, 'users'),
+                where('uid', '==', currUser?.uid)
+            );
+            const userDoc = await getDocs(q);
+            const docID = userDoc.docs[0].id;
 
-    const submitLink = () => {
-        const s = JSON.stringify({ link });
-
-        fetch("/getLink", { method: "POST", body: s })
-            .catch(() => { alert("Cannot POST link") })
+            try {
+                await setDoc(db, "users", docID,)
+            }
+        }
     }
 
     return (
         <div>
-            <input type="text" value={link} onChange={(e) => setLink(e.target.value)}></input>
-            <button onClick={() => submitLink()}>Submit</button>
-            {
-                (typeof rss === 'undefined') ? (
-                    <p>Loading...</p>
-                ) : (
-                    <p>{rss[2]}</p>
-
-                )
-            }
+            <form onSubmit={e => { e.preventDefault(); submitData(e) }}>
+                <input type="url" placeholder='RSS Link' value={link} onChange={(e) => setLink(e.target.value)}>
+                </input>
+                <button type="submit">Add</button>
+            </form>
         </div >
     );
 }

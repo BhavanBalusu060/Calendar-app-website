@@ -10,6 +10,7 @@ import News from './HolderPages/NewsHolder';
 import NewsHolder from './HolderPages/NewsHolder';
 
 export default function App() {
+
   return (
     <Router className="division">
       <Routes>

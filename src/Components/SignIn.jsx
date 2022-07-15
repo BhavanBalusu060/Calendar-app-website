@@ -5,7 +5,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, login } from '../firebase';
 import '../Styles/SignIn.css';
-
+import Event from "../Pages/Events"
 function SignIn() {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
@@ -14,6 +14,7 @@ function SignIn() {
   useEffect(() => {
     if (loading) {
       // future implementation of loading screen
+      <Event />
       return;
     }
     if (currUser) nav('/dash');

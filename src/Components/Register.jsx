@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, register } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import '../Styles/Register.css'
-
 function Register() {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
@@ -12,7 +11,6 @@ function Register() {
     const nav = useNavigate();
     useEffect(() => {
         if (loading) {
-            //future implementation of loading screen
             return;
         }
         if (currUser) nav("/");

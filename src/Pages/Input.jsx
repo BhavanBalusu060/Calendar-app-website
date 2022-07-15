@@ -3,7 +3,7 @@ import { SelectDatepicker } from "react-select-datepicker";
 import '../Styles/EventInput.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebase';
-import { doc, setDoc, collection, where, query, getDocs } from "firebase/firestore";
+import { doc, setDoc, collection, where, query, getDocs, addDoc } from "firebase/firestore";
 import EventsHolder from "../Components/EventsHolder";
 
 
@@ -38,7 +38,7 @@ export default function Input() {
             const eventObject = {
                 name: name,
                 details: details,
-                day: (day.getMonth() + 1) + "/" + day.getDate() + "/" + day.getFullYear(),
+                day: day,
                 start_time: startTime,
                 duration: duration
             }
@@ -52,7 +52,7 @@ export default function Input() {
                 const docID = userDoc.docs[0].id;
 
                 try {
-                    await setDoc(doc(db, "users", docID, "events", `EVENT ${eventObject.name}`), eventObject);
+                    await addDoc(collection(db, "users", docID, "events"), eventObject);
                 } catch (err) {
                     alert('An error occured in adding the event.')
                 }
@@ -158,7 +158,7 @@ export default function Input() {
     return (
         <>
             <form action="" onSubmit={e => submitData(e)} className="event-input">
-                <input type="text" onChange={e => { e.preventDefault(); setName(e.target.value); setDefaultBorder(e) }} className="event name" id="eventName" placeholder="Name" />
+                <input type="text" onChange={e => { e.preventDefault(); setName(e.target.value); setDefaultBorder(e) }} className="event name" id="eventName" placeholder="Title" />
                 <textarea className="event details" onChange={e => { e.preventDefault(); setDetails(e.target.value); setDefaultBorder(e) }} placeholder="Details"></textarea>
                 <SelectDatepicker selectedDate={day} onDateChange={onDateChange} className="event date" />
 

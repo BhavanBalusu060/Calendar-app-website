@@ -1,7 +1,7 @@
 // this file is for holding all of the events 
 import { useEffect, useState } from "react";
 import { db, auth } from "../firebase";
-import { collection, query, onSnapshot, where, getDocs } from "firebase/firestore";
+import { collection, query, onSnapshot, where, getDocs, orderBy } from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Event from "./Event";
 
@@ -35,12 +35,13 @@ export default function EventsHolder() {
         })
 
         if (user !== '') {
-            const q = query(collection(db, 'users', user, 'events'))
+            const q = query(collection(db, 'users', user, 'events'), orderBy("day"), orderBy("start_time"))
             const unsub = onSnapshot(q, (querySnapshot) => {
                 let eventsArr = []
                 querySnapshot.forEach(event => {
                     let data = event.data();
-                    eventsArr.push({ name: data.name, details: data.details, day: data.day, start_time: data.start_time, duration: data.duration })
+                    console.log(event)
+                    eventsArr.push({ name: data.name, details: data.details, day: data.day.toDate(), start_time: data.start_time, duration: data.duration, docID: event.id, user: user })
 
                 })
 
@@ -49,7 +50,7 @@ export default function EventsHolder() {
             return () => unsub;
         }
 
-    })
+    }, [user])
 
     return (
         <div>

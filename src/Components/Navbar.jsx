@@ -30,6 +30,7 @@ function Navbar(props) {
             setName(data.name);
         } catch (err) {
             alert('An error had occurred while fetching the users name');
+            console.log(err)
         }
     };
 
@@ -68,7 +69,7 @@ function Navbar(props) {
                 <div className='menuButt-holder'>
                     <div className='top-holder'>
                         <h1>
-                            Calendar
+                            Calendize
                         </h1>
                         <button className='x-button' onClick={closeMenu}>
                             <i className="bi bi-x-lg"></i>
@@ -95,7 +96,7 @@ function Navbar(props) {
                     <button className="menu-button" onClick={() => { navigate("news") }}>
                         News
                     </button>
-                    <button className="menus-button special" onClick={logout}>
+                    <button className="menus-button special" onClick={() => logout}>
                         Log out
                     </button>
                 </div>

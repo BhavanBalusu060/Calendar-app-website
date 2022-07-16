@@ -10,7 +10,7 @@ export default function Event(props) {
     }
 
     return (
-        <div className="event">
+        <div className="event" onClick={del}>
             {props.event.name} |
             {props.event.details} |
             {props.event.day.toString()} |

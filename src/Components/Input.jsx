@@ -4,7 +4,7 @@ import '../Styles/EventInput.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebase';
 import { doc, setDoc, collection, where, query, getDocs, addDoc } from "firebase/firestore";
-import EventsHolder from "../Components/EventsHolder";
+import EventsHolder from "./EventsHolder";
 
 
 export default function Input() {
@@ -34,12 +34,21 @@ export default function Input() {
 
 
         if (valid === true) {
+
+            let milTime;
+            if (startTime.indexOf("am") !== -1) {
+                milTime = parseInt(startTime.substring(0, startTime.indexOf(":"))) < 10 ? "0" + startTime.substring(0, startTime.indexOf("am")) : startTime.substring(0, startTime.indexOf("am"))
+            } else {
+                let hrs = parseInt(startTime.substring(0, startTime.indexOf(":")))
+                hrs += 12;
+                milTime = hrs + ":" + startTime.substring(startTime.indexOf(":") + 1, startTime.indexOf(" "));
+            }
             // submit form 
             const eventObject = {
                 name: name,
                 details: details,
                 day: day,
-                start_time: startTime,
+                start_time: milTime,
                 duration: duration
             }
 
@@ -176,8 +185,6 @@ export default function Input() {
                 <button type="submit">Submit</button>
                 <p className="invalidData">Error: Invalid Data!</p>
             </form>
-
-            <EventsHolder />
         </>
 
     )

@@ -143,19 +143,27 @@
 .top-holder {
     display: flex;
     flex-direction: row;
+
+}
+
+.top-holder img {
+    margin-left: 25px;
+    margin-top: 18px;
+    width: 80px;
+    height: 45px;
 }
 
 .top-holder h1 {
     font-size: 23px;
-    padding-top: 25px;
-    padding-left: 60px;
+    padding-top: 32px;
+    padding-right: 20px;
 }
 
 .x-button {
-    margin-left: 120px;
-    font-size: 25px;
+    margin-left: 63px;
+    font-size: 20px;
     margin-bottom: 27px;
-    margin-top: 15px;
+    margin-top: 25px;
     padding: 7px 10px 7px 10px;
     border-radius: 10px;
     background: transparent;

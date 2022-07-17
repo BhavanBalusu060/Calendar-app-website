@@ -45,7 +45,7 @@ const register = async (name, email, password) => {
 	} catch (err) {
 		console.log(err);
 		alert(
-			"Make sure all fields are filled in correctly/This email is already in use"
+			"There was an error creating your account"
 		);
 	}
 };

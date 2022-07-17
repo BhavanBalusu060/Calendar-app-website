@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebase';
-import { doc, setDoc, collection, where, query, getDocs } from "firebase/firestore";
+import { doc, setDoc, updateDoc, collection, where, query, getDocs } from "firebase/firestore";
 
 function News() {
     const [currUser] = useAuthState(auth)
@@ -9,21 +9,18 @@ function News() {
     console.log(link)
 
     function submitData(e) {
-        const linkObject = {
-            link: link
-        }
-        try {
-            const q = query(
-                collection(db, 'users'),
-                where('uid', '==', currUser?.uid)
-            );
-            const userDoc = await getDocs(q);
-            const docID = userDoc.docs[0].id;
+        // const linkObject = {
+        //     link: link
+        // }
+        // try {
+        //     const q = query(
+        //         collection(db, 'users'),
+        //         where('uid', '==', currUser?.uid)
+        //     );
+        //     const userDoc = await getDocs(q);
+        //     const docID = userDoc.docs[0].id;
 
-            try {
-                await setDoc(db, "users", docID,)
-            }
-        }
+        // }
     }
 
     return (

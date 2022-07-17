@@ -5,7 +5,7 @@ import { query, collection, getDocs, where, doc, setDoc } from 'firebase/firesto
 import { auth, db, logout } from '../firebase';
 import '../Styles/Navbar.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
+import logo from '../logo.png'
 function Navbar(props) {
     const [navbarOpen, setNavbarOpen] = useState(false);
     const handleToggle = () => {
@@ -67,8 +67,9 @@ function Navbar(props) {
             <div className={`menuNav ${navbarOpen ? " showMenu" : " closeMenu"}`}>
                 <div className='menuButt-holder'>
                     <div className='top-holder'>
+                        <img src={logo} />
                         <h1>
-                            Calendar
+                            Calendize
                         </h1>
                         <button className='x-button' onClick={closeMenu}>
                             <i className="bi bi-x-lg"></i>

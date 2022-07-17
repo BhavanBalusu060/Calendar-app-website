@@ -6,6 +6,7 @@ import '../Styles/Register.css'
 function Register() {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
+    const [confPass, setConfPass] = useState("");
     const [name, setName] = useState("");
     const [currUser, loading, err] = useAuthState(auth);
     const nav = useNavigate();
@@ -15,6 +16,18 @@ function Register() {
         }
         if (currUser) nav("/");
     }, [currUser, loading]);
+
+    function confirmPass() {
+        if (pass == confPass)
+            register(name, email, pass)
+        else {
+            const passwordBox = document.querySelectorAll('.password.conf')
+            for (let el of passwordBox) {
+                el.style.border = '2px solid red'
+            }
+
+        }
+    }
 
     return (
         <div className="holder">
@@ -36,11 +49,15 @@ function Register() {
                         onChange={(e) => setEmail(e.target.value)} />
                     <input
                         value={pass}
-                        onChange={(e) => setPass(e.target.value)} placeholder="Password" type="password"
+                        onChange={(e) => { setPass(e.target.value); e.target.style.border = "none" }} placeholder="Password" type="password"
                         className="password" />
+                    <input
+                        value={confPass}
+                        onChange={(e) => { setConfPass(e.target.value); e.target.style.border = "none" }} placeholder="Confirm Password" type="password"
+                        className="password conf" />
                     <button
                         className='register'
-                        onClick={() => register(name, email, pass)}>
+                        onClick={confirmPass}>
                         Register</button>
                 </div>
                 <div className='have-account'>

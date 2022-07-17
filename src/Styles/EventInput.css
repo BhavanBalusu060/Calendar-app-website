@@ -59,7 +59,7 @@ input::-webkit-inner-spin-button {
 }
 
 .event-input input {
-	border: 1px solid rgba(0, 0, 0, 0.2);
+	border: 2px solid rgba(0, 0, 0, 0.2);
 	margin-bottom: 2vh;
 }
 
@@ -111,7 +111,7 @@ input::-webkit-inner-spin-button {
 
 .invalidData {
 	font-weight: 500;
-	align-self: center;
+	align-self: left;
 	color: red;
 
 	display: none;

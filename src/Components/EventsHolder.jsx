@@ -54,7 +54,7 @@ export default function EventsHolder() {
 
     return (
         <div>
-            {events.map(event => <Event event={event} />)}
+            {events.map(event => <Event event={event} key={event.name} />)}
         </div>
     )
 

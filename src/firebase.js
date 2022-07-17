@@ -41,6 +41,7 @@ const register = async (name, email, password) => {
 			name,
 			authProvider: "local",
 			email,
+			location: "None",
 		});
 	} catch (err) {
 		console.log(err);

@@ -3,8 +3,7 @@ import { SelectDatepicker } from "react-select-datepicker";
 import '../Styles/EventInput.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebase';
-import { doc, setDoc, collection, where, query, getDocs, addDoc } from "firebase/firestore";
-import EventsHolder from "./EventsHolder";
+import { collection, where, query, getDocs, addDoc } from "firebase/firestore";
 
 
 export default function Input() {

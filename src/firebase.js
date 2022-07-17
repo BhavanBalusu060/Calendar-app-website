@@ -7,7 +7,13 @@ import {
 	signOut,
 } from "firebase/auth";
 
-import { getFirestore, setDoc, doc } from "firebase/firestore";
+import {
+	getFirestore,
+	setDoc,
+	doc,
+	addDoc,
+	collection,
+} from "firebase/firestore";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyBoJ9qNhK4N6NwhwCGuLY1bVlpzZEmyMI0",
@@ -36,7 +42,7 @@ const register = async (name, email, password) => {
 	try {
 		const res = await createUserWithEmailAndPassword(auth, email, password);
 		const user = res.user;
-		await setDoc(doc(db, "users", name), {
+		await addDoc(collection(db, "users"), {
 			uid: user.uid,
 			name,
 			authProvider: "local",
@@ -45,9 +51,7 @@ const register = async (name, email, password) => {
 		});
 	} catch (err) {
 		console.log(err);
-		alert(
-			"There was an error creating your account"
-		);
+		alert("There was an error creating your account");
 	}
 };
 

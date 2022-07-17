@@ -34,7 +34,6 @@ function Navbar(props) {
         }
     };
 
-
     const navigate = (direction) => {
         console.log("/" + direction)
         nav("/" + direction);
@@ -96,7 +95,7 @@ function Navbar(props) {
                     <button className="menu-button" onClick={() => { navigate("news") }}>
                         News
                     </button>
-                    <button className="menus-button special" onClick={() => logout}>
+                    <button className="menus-button special" onClick={() => { logout(); nav("/") }}>
                         Log out
                     </button>
                 </div>

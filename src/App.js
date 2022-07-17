@@ -1,5 +1,4 @@
 import { MemoryRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
 
 import Sign from "./Components/SignIn";
 import Register from "./Components/Register";
@@ -8,6 +7,7 @@ import Reset from "./Components/Reset";
 import News from "./HolderPages/NewsHolder";
 import NewsHolder from "./HolderPages/NewsHolder";
 import Events from "./Pages/Events";
+import Weather from "./Pages/Weather";
 
 export default function App() {
 	return (
@@ -25,6 +25,7 @@ export default function App() {
 					path="/news"
 					element={<NewsHolder title="Manage News" />}
 				/>
+				<Route path="/weather" element={<Weather />} />;
 			</Routes>
 		</Router>
 	);

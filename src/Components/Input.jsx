@@ -40,7 +40,7 @@ export default function Input() {
                 milTime = parseInt(startTime.substring(0, startTime.indexOf(":"))) < 10 ? "0" + startTime.substring(0, startTime.indexOf("am")) : startTime.substring(0, startTime.indexOf("am"))
             } else {
                 let hrs = parseInt(startTime.substring(0, startTime.indexOf(":")))
-                hrs += 12;
+                if (hrs !== 12) hrs += 12;
                 milTime = hrs + ":" + startTime.substring(startTime.indexOf(":") + 1, startTime.indexOf(" "));
             }
             // submit form 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate, Link } from 'react-router-dom';
-import { query, collection, getDocs, where, doc, setDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { query, collection, getDocs, where } from 'firebase/firestore';
 import { auth, db, logout } from '../firebase';
 import '../Styles/Navbar.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';

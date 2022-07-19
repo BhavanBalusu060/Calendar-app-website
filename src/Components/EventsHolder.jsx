@@ -4,6 +4,8 @@ import { db, auth } from "../firebase";
 import { collection, query, onSnapshot, where, getDocs, orderBy } from "firebase/firestore";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Event from "./Event";
+import '../Styles/EventsHolder.css'
+
 
 export default function EventsHolder() {
 
@@ -40,11 +42,9 @@ export default function EventsHolder() {
                 let eventsArr = []
                 querySnapshot.forEach(event => {
                     let data = event.data();
-                    console.log(event)
-                    eventsArr.push({ name: data.name, details: data.details, day: data.day.toDate(), start_time: data.start_time, duration: data.duration, docID: event.id, user: user })
+                    eventsArr.push({ user: currUser.uid, name: data.name, details: data.details, day: data.day.toDate(), start_time: data.start_time, duration: data.duration, docID: event.id })
 
                 })
-
                 setEvents(eventsArr)
             })
             return () => unsub;
@@ -53,8 +53,15 @@ export default function EventsHolder() {
     }, [user])
 
     return (
-        <div>
-            {events.map(event => <Event event={event} key={event.name} />)}
+        <div >
+            <div id="subhousing">
+                <label className="headers">
+                    Events
+                </label>
+                <div className="inside">
+                    {events.map((event) => <Event className="event" event={event} props={event} id={event.id} />)}
+                </div>
+            </div>
         </div>
     )
 

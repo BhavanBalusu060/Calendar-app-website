@@ -165,7 +165,10 @@ export default function Input() {
     }
 
     return (
-        <>
+        <div className="event-holder-box">
+            <label className="header">
+                Add Events
+            </label>
             <form action="" onSubmit={e => submitData(e)} className="event-input">
                 <input type="text" onChange={e => { e.preventDefault(); setName(e.target.value); setDefaultBorder(e) }} className="event name" id="eventName" placeholder="Title" />
                 <textarea className="event details" onChange={e => { e.preventDefault(); setDetails(e.target.value); setDefaultBorder(e) }} placeholder="Details"></textarea>
@@ -183,10 +186,10 @@ export default function Input() {
                     </div>
                 </div>
 
-                <button type="submit">Submit</button>
+                <button type="submit">Add</button>
                 <p className="invalidData">Error: Invalid Data!</p>
             </form>
-        </>
+        </div>
 
     )
 

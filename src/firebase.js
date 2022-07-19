@@ -36,7 +36,7 @@ const register = async (name, email, password) => {
 	try {
 		const res = await createUserWithEmailAndPassword(auth, email, password);
 		const user = res.user;
-		await setDoc(doc(db, "users", name), {
+		await setDoc(doc(db, "users", user.uid), {
 			uid: user.uid,
 			name,
 			authProvider: "local",

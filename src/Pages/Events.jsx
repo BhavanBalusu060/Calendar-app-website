@@ -1,13 +1,14 @@
 import Navbar from "../Components/Navbar";
 import Input from "../Components/Input";
 import EventsHolder from "../Components/EventsHolder";
-
 export default function Events(props) {
     return (
-        <div>
+        <div className="main">
             <Navbar title={props.title} />
-            <Input />
-            <EventsHolder />
-        </div>
+            <div className="housing" >
+                <Input />
+                <EventsHolder />
+            </div>
+        </div >
     )
 }

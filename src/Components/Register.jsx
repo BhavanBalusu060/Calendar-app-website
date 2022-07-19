@@ -18,7 +18,7 @@ function Register() {
     }, [currUser, loading]);
 
     function confirmPass() {
-        if (pass == confPass)
+        if (pass === confPass)
             register(name, email, pass)
         else {
             const passwordBox = document.querySelectorAll('.password.conf')

@@ -4,12 +4,42 @@ import { useState, useRef } from "react"
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "../firebase";
 import { doc, query, collection, where, getDocs, updateDoc } from "firebase/firestore";
+import { useEffect } from "react";
 
 export default function Location() {
     const [currUser] = useAuthState(auth);
 
     const [loc, setLoc] = useState("None");
     const locRef = useRef("")
+
+    const getUserLoc = async () => {
+        if (currUser == null) {
+            return;
+        }
+        try {
+            const q = query(
+                collection(db, 'users'),
+                where('uid', '==', currUser?.uid)
+            );
+            const userDoc = await getDocs(q);
+            const userLoc = userDoc.docs[0].get("location")
+            console.log(userLoc)
+            setLoc(userLoc)
+
+
+        } catch (err) {
+            console.log(err);
+            alert('An error had occurred while fetching the users name');
+            return;
+
+        }
+    }
+
+    useEffect(() => {
+        getUserLoc()
+    }, [currUser])
+
+
 
     function getLocation(e) {
         e.preventDefault();
@@ -33,8 +63,7 @@ export default function Location() {
             if (!str.match(/[a-z]/i))
                 return true;
         }
-
-        return false;
+        console.log(val)
     }
 
     const submitData = async e => {
@@ -50,7 +79,6 @@ export default function Location() {
         }
         else {
             wrong.style.display = "block"
-            setLoc("None")
             const inp = document.querySelector(".locationInput")
             inp.style.border = "1px solid red";
         }
@@ -78,7 +106,7 @@ export default function Location() {
         <>
             <Navbar title={"Weather"} />
             <div className="GetUserLocation">
-                <h1>Current Location: {loc} </h1>
+                <h1>Location for Weather: {loc} </h1>
                 <button onClick={(e) => getLocation(e)}>Request Location</button>
                 <h2>Want to type your city in instead?</h2>
                 <form onSubmit={e => submitData(e)}>

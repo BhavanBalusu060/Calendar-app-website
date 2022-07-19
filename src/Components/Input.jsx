@@ -3,8 +3,7 @@ import { SelectDatepicker } from "react-select-datepicker";
 import '../Styles/EventInput.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebase';
-import { doc, setDoc, collection, where, query, getDocs, addDoc } from "firebase/firestore";
-import EventsHolder from "./EventsHolder";
+import { collection, where, query, getDocs, addDoc } from "firebase/firestore";
 
 
 export default function Input() {
@@ -37,7 +36,8 @@ export default function Input() {
 
             let milTime;
             if (startTime.indexOf("am") !== -1) {
-                milTime = parseInt(startTime.substring(0, startTime.indexOf(":"))) < 10 ? "0" + startTime.substring(0, startTime.indexOf("am")) : startTime.substring(0, startTime.indexOf("am"))
+                if (parseInt(startTime.substring(0, startTime.indexOf(":"))) == 12) milTime = "00" + startTime.substring(startTime.indexOf(":"), startTime.indexOf(" "));
+                else milTime = parseInt(startTime.substring(0, startTime.indexOf(":"))) < 10 ? "0" + startTime.substring(0, startTime.indexOf("am")) : startTime.substring(0, startTime.indexOf("am"))
             } else {
                 let hrs = parseInt(startTime.substring(0, startTime.indexOf(":")))
                 if (hrs !== 12) hrs += 12;

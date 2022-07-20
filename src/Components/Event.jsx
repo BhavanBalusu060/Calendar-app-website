@@ -5,16 +5,22 @@ import { db } from "../firebase";
 export default function Event(props) {
 
     const del = async (id) => {
+        console.log("dkjfs")
+        console.log(props.event.user)
         await deleteDoc(doc(db, "users", props.event.user, "events", id));
     }
 
     function getTime() {
         let hr = parseInt(props.event.start_time.substring(0, props.event.start_time.indexOf(":")));
-        const min = parseInt(props.event.start_time.substring(props.event.start_time.indexOf(":") + 1));
+        let min = parseInt(props.event.start_time.substring(props.event.start_time.indexOf(":") + 1));
+        if (min < 10) {
+            min = "0" + min;
+        }
         if (hr > 12) {
             hr = hr % 12;
             return hr + ":" + min + " pm";
         }
+
         return hr + ":" + min + " am";
     }
 

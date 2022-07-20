@@ -13,44 +13,50 @@ export default function EventsHolder() {
     const [events, setEvents] = useState([])
     const [user, setUser] = useState('')
 
-    const getUser = async () => {
-        try {
-            const q = query(
-                collection(db, 'users'),
-                where('uid', '==', currUser?.uid)
-            );
-            const userDoc = await getDocs(q);
-            return userDoc.docs[0].id;
-
-
-        } catch (err) {
-            alert('An error had occurred while fetching the users name');
-            return;
-        }
-    }
 
 
     useEffect(() => {
-        getUser().then(res => {
-            setUser(res);
 
-        })
+        const getUser = async () => {
+            try {
+                const q = query(
+                    collection(db, 'users'),
+                    where('uid', '==', currUser?.uid)
+                );
+                const userDoc = await getDocs(q);
+                // return userDoc.docs[0].id;
+                setUser(userDoc.docs[0].id)
 
-        if (user !== '') {
-            const q = query(collection(db, 'users', user, 'events'), orderBy("day"), orderBy("start_time"))
-            const unsub = onSnapshot(q, (querySnapshot) => {
-                let eventsArr = []
-                querySnapshot.forEach(event => {
-                    let data = event.data();
-                    eventsArr.push({ user: currUser.uid, name: data.name, details: data.details, day: data.day.toDate(), start_time: data.start_time, duration: data.duration, docID: event.id })
 
-                })
-                setEvents(eventsArr)
-            })
-            return () => unsub;
+            } catch (err) {
+                return;
+            }
         }
 
-    }, [user])
+        const usr = async () => {
+            await getUser();
+
+
+            if (user !== '') {
+                const q = query(collection(db, 'users', user, 'events'), orderBy("day"), orderBy("start_time"))
+                const unsub = onSnapshot(q, (querySnapshot) => {
+                    let eventsArr = []
+                    querySnapshot.forEach(event => {
+                        let data = event.data();
+                        console.log(event.id)
+                        eventsArr.push({ user: user, name: data.name, details: data.details, day: data.day.toDate(), start_time: data.start_time, duration: data.duration, docID: event.id })
+
+                    })
+                    setEvents(eventsArr)
+                })
+                return () => unsub;
+            }
+        }
+
+        usr();
+
+
+    }, [user, currUser])
 
     return (
         <div >
@@ -59,7 +65,7 @@ export default function EventsHolder() {
                     Events
                 </label>
                 <div className="inside">
-                    {events.map((event) => <Event className="event" event={event} props={event} id={event.id} />)}
+                    {events.map((event, index) => <Event className="event" event={event} props={event} id={event.docID} key={index} />)}
                 </div>
             </div>
         </div>
